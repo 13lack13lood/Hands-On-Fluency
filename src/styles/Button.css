@@ -1,6 +1,7 @@
 :root {
     --orange: #fb8065;
 }
+
 .button {
     height: 60px;
     min-width: 250px;

@@ -1,0 +1,72 @@
+:root {
+    --orange: #fb8065;
+}
+
+input[type="text"] {
+    color: black;
+    background: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+}
+
+:focus {
+    outline: none;
+}
+
+.outside {
+    float: left;
+    width: 100%;
+    margin: 40px 0;
+    margin-top: 0;
+    position: relative;
+}
+
+.effect {
+    border: 1px solid #ccc;
+    padding: 7px 14px 9px;
+    transition: 0.4s;
+}
+.effect ~ .focus-border:before,
+.effect ~ .focus-border:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--orange);
+    transition: 0.4s;
+}
+.effect ~ .focus-border:after {
+    top: auto;
+    bottom: 0;
+}
+.effect ~ .focus-border i:before,
+.effect ~ .focus-border i:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 2px;
+    height: 0;
+    background-color: var(--orange);
+    transition: 0.6s;
+}
+.effect ~ .focus-border i:after {
+    left: auto;
+    right: 0;
+}
+.effect:focus ~ .focus-border:before,
+.effect:focus ~ .focus-border:after {
+    left: 0;
+    width: 100%;
+    transition: 0.4s;
+}
+.effect:focus ~ .focus-border i:before,
+.effect:focus ~ .focus-border i:after {
+    top: 0;
+    height: 100%;
+    transition: 0.6s;
+}
