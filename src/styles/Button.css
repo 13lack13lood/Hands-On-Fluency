@@ -1,0 +1,43 @@
+:root {
+    --orange: #fb8065;
+}
+.button {
+    height: 60px;
+    min-width: 250px;
+    width: fit-content;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    position: relative;
+    background-color: transparent;
+    cursor: pointer;
+    border: 2px solid var(--orange);
+    overflow: hidden;
+    border-radius: 30px;
+    color: var(--orange);
+    transition: all 0.5s ease-in-out;
+}
+
+.type1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: all 0.5s ease-in-out;
+    background-color: var(--orange);
+    border-radius: 30px;
+    visibility: hidden;
+    height: 10px;
+    width: 10px;
+    z-index: -1;
+}
+
+.button:hover {
+    box-shadow: 1px 1px 200px var(--orange);
+    color: #fff;
+    border: none;
+}
+
+.type1:hover::after {
+    visibility: visible;
+    transform: scale(100) translateX(2px);
+}
