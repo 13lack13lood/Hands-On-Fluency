@@ -26,13 +26,18 @@ import image_v from "../assets/flipcard/v.png";
 import image_b from "../assets/flipcard/b.png";
 import image_n from "../assets/flipcard/n.png";
 import image_m from "../assets/flipcard/m.png";
+import image_hello from "../assets/flipcard/hello.png";
+import image_i_love_you from "../assets/flipcard/i_love_you.png";
+import image_no from "../assets/flipcard/no.png";
+import image_yes from "../assets/flipcard/yes.png";
+import image_thank_you from "../assets/flipcard/thank_you.png";
 
 const FlipCard = ({ text }) => {
     return (
         <div className="flip-card h-[85%] w-[300px]">
             <div className="flip-card-inner">
                 <div className="flip-card-front bg-primary">
-                    <div className="flex flex-col items-center justify-center text-6xl font-medium text-white text-center h-full pb-5 capitalize">{text}</div>
+                    <div className="flex flex-col items-center justify-center text-6xl font-medium text-white text-center h-full pb-5 capitalize">{text.replaceAll("_", " ")}</div>
                 </div>
                 <div className="flip-card-back">
                     <div className="flex flex-col items-center justify-center my-auto">
