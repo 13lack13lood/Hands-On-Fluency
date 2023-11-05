@@ -2,6 +2,7 @@ import React from "react";
 import Input from "./Input";
 import Button from "./Button";
 import STATES from "../States";
+import { createAccount } from "../services/accountService";
 
 const CreateAccount = ({ setDisplay }) => {
     return (
@@ -24,7 +25,8 @@ const CreateAccount = ({ setDisplay }) => {
                 <Button
                     text="Create Account"
                     onclick={() => {
-                        setDisplay(STATES.CHOOSE_LEVEL);
+                        createAccount("first", "last", "realEmail", "pass", 5);
+                        // setDisplay(STATES.CHOOSE_LEVEL);
                     }}
                 ></Button>
             </div>
