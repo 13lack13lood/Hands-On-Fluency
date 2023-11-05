@@ -3,6 +3,7 @@ import Button from "./components/Button";
 import STATES from "./States";
 import NavBar from "./components/NavBar";
 import Selector from "./components/Selector";
+import WebcamCapture from "./components/WebCamCapture";
 
 function App() {
     const [display, setDisplay] = useState(STATES.FRONT_PAGE);

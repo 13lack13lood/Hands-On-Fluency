@@ -1,3 +1,5 @@
+let isAuth = false;
+
 const createAccount = (firstName, lastName, email, password, selected_course) => {
     let params = {
         email: email,
@@ -15,9 +17,35 @@ const createAccount = (firstName, lastName, email, password, selected_course) =>
     request.send(JSON.stringify(params));
     request.onload = () => {
         if (request.status == 200) {
-            console.log(request.response);
+            console.log(request.status);
+            setAuth();
         }
     };
 };
 
-export { createAccount };
+const login = (email, password) => {
+    let params = {
+        email: email,
+        password: password,
+    };
+
+    let request = new XMLHttpRequest();
+    request.open("POST", "http://localhost:5000/login");
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(JSON.stringify(params));
+    request.onload = () => {
+        if (request.status == 200) {
+            setAuth(true);
+        }
+    };
+};
+
+const setAuth = () => {
+    isAuth = true;
+};
+
+const isAuthenticated = () => {
+    return isAuth;
+};
+
+export { createAccount, login, isAuthenticated };

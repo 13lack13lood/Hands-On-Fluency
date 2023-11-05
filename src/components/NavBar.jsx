@@ -1,6 +1,7 @@
 import React from "react";
 import STATES from "../States";
 import icon from "../assets/icon.png";
+import { isAuthenticated } from "../services/accountService";
 
 const NavBar = ({ setDisplay }) => {
     return (
@@ -20,7 +21,11 @@ const NavBar = ({ setDisplay }) => {
                         <li>
                             <div
                                 onClick={() => {
-                                    setDisplay(STATES.HOME);
+                                    if (isAuthenticated()) {
+                                        setDisplay(STATES.HOME);
+                                    } else {
+                                        setDisplay(STATES.FRONT_PAGE);
+                                    }
                                 }}
                                 className="block py-4 px-3 text-white  transition ease-in-out hover:scale-125 duration-200"
                             >
