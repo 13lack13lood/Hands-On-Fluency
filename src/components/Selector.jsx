@@ -18,7 +18,7 @@ const Selector = ({ display, setDisplay }) => {
     } else if (display == STATES.HOME) {
         return <HomePage setDisplay={setDisplay}></HomePage>;
     } else if (display >= STATES.LESSON_1) {
-        return <Lesson number={display - STATES.LESSON_1 + 1}></Lesson>;
+        return <Lesson number={display - STATES.LESSON_1 + 1} setDisplay={setDisplay}></Lesson>;
     } else {
         return <FrontPage setDisplay={setDisplay}></FrontPage>;
     }

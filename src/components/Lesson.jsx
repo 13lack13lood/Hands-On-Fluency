@@ -3,8 +3,10 @@ import FlipCard from "./FlipCard";
 import ArrowButtonRight from "./ArrowButtonRight";
 import ArrowButtonLeft from "./ArrowButtonLeft";
 import WebCamCapture from "./WebCamCapture";
+import WideButton from "./WideButton";
+import STATES from "../States";
 
-const Lesson = ({ number }) => {
+const Lesson = ({ number, setDisplay }) => {
     const [selected, setSelected] = useState("video");
     const [currentFlashCard, setcurrentFlashCard] = useState(97);
     const [submitted, setSubmitted] = useState("");
@@ -26,7 +28,7 @@ const Lesson = ({ number }) => {
             let list = [];
 
             for (let i = 0; i <= 5; i++) {
-                list.push(questions[Math.floor(Math.random(0, 1) * 6)]);
+                list.push(questions[Math.floor(Math.random(0, 1) * questions.length)]);
             }
 
             return list;
@@ -96,6 +98,17 @@ const Lesson = ({ number }) => {
         let questions = generateQuiz(number);
 
         if (submitted != "") {
+            return (
+                <div className="flex flex-col h-full">
+                    <div className="flex flex-col text-primary text-4xl items-center font-semibold mr-32">{`What is ${questions[currentQuestion]}`}</div>
+                    <div className="flex flex-col text-primary text-7xl items-center h-full font-medium mt-32">Correct</div>
+                    {currentQuestion == questions.length ? (
+                        <WideButton text={"Complete Quiz"} onclick={setDisplay(STATES.HOME)}></WideButton>
+                    ) : (
+                        <WideButton text={"Next Question"} onclick={setCurrentQuestion(currentQuestion + 1)}></WideButton>
+                    )}
+                </div>
+            );
         }
 
         return (

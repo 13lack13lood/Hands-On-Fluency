@@ -46,7 +46,7 @@ function WebCamCapture({ setSubmitted }) {
                 body: formData,
             })
                 .then((response) => {
-                    setSubmitted(response);
+                    setSubmitted("asdf");
                 })
                 .catch((error) => {
                     console.error("Error sending video to the backend:", error);
