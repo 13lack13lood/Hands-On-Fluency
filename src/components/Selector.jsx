@@ -6,6 +6,7 @@ import { useState } from "react";
 import ChooseLevel from "./ChooseLevel";
 import Login from "./Login";
 import HomePage from "./HomePage";
+import Lesson from "./Lesson";
 
 const Selector = ({ display, setDisplay }) => {
     if (display == STATES.CREATE_ACCOUNT) {
@@ -16,6 +17,8 @@ const Selector = ({ display, setDisplay }) => {
         return <Login setDisplay={setDisplay}></Login>;
     } else if (display == STATES.HOME) {
         return <HomePage setDisplay={setDisplay}></HomePage>;
+    } else if (display >= STATES.LESSON_1) {
+        return <Lesson number={display - STATES.LESSON_1 + 1}></Lesson>;
     } else {
         return <FrontPage setDisplay={setDisplay}></FrontPage>;
     }

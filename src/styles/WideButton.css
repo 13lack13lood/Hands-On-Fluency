@@ -7,10 +7,6 @@
     --color-shadow: #00000080;
 }
 
-:root {
-    --orange: #fb8065;
-}
-
 .btn-content {
     display: flex;
     align-items: center;
