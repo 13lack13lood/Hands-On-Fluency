@@ -9,6 +9,7 @@ function WebCamCapture({ setSubmitted }) {
     const startRecording = () => {
         setVideoChunks([]);
         setRecordingText("Submit");
+        setSubmitted(null);
 
         navigator.mediaDevices
             .getUserMedia({ video: true })
@@ -41,12 +42,14 @@ function WebCamCapture({ setSubmitted }) {
             const formData = new FormData();
             formData.append("video", blob, "recorded-video.webm");
 
-            fetch("http://localhost:5000/upload", {
+            fetch("http://127.0.0.1:5000/upload", {
                 method: "POST",
                 body: formData,
             })
-                .then((response) => {
-                    setSubmitted("asdf");
+                .then((response) => response.text())
+                .then((res) => {
+                    console.log(res);
+                    setSubmitted(res);
                 })
                 .catch((error) => {
                     console.error("Error sending video to the backend:", error);
@@ -57,8 +60,15 @@ function WebCamCapture({ setSubmitted }) {
     return (
         <div className="flex flex-row py-5 items-center">
             <video ref={videoRef} autoPlay muted />
-            <button className="bg-primary text-white text-3xl p-3 px-4 rounded-3xl ml-10 transition ease-in-out hover:scale-125 duration-200" onClick={recordingText == "Start" ? () => startRecording() : () => stopRecording()}>
-                {recordingText}
+            <button
+                className="bg-primary text-white text-3xl p-3 px-4 rounded-3xl ml-10 transition ease-in-out hover:scale-125 duration-200"
+                onClick={
+                    recordingText == "Start"
+                        ? () => startRecording()
+                        : () => stopRecording()
+                }
+            >
+                Submit
             </button>
         </div>
     );

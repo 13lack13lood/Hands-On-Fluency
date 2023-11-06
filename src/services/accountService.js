@@ -1,6 +1,12 @@
 let isAuth = false;
 
-const createAccount = (firstName, lastName, email, password, selected_course) => {
+const createAccount = (
+    firstName,
+    lastName,
+    email,
+    password,
+    selected_course
+) => {
     let params = {
         email: email,
         first_name: firstName,
@@ -12,8 +18,12 @@ const createAccount = (firstName, lastName, email, password, selected_course) =>
     console.log(JSON.stringify(params));
 
     let request = new XMLHttpRequest();
-    request.open("POST", "http://localhost:5000/register");
+    request.open("POST", "http://127.0.0.1:5000/register");
     request.setRequestHeader("Content-Type", "application/json");
+    request.setRequestHeader("Access-Control-Allow-Origin", "*");
+    request.setRequestHeader("Access-Control-Allow-Methods", "*");
+    request.setRequestHeader("Access-Control-Allow-Headers", "*");
+
     request.send(JSON.stringify(params));
     request.onload = () => {
         if (request.status == 200) {
@@ -30,8 +40,11 @@ const login = (email, password) => {
     };
 
     let request = new XMLHttpRequest();
-    request.open("POST", "http://localhost:5000/login");
+    request.open("POST", "http://127.0.0.1:5000/login");
     request.setRequestHeader("Content-Type", "application/json");
+    request.setRequestHeader("Access-Control-Allow-Origin", "*");
+    request.setRequestHeader("Access-Control-Allow-Methods", "*");
+    request.setRequestHeader("Access-Control-Allow-Headers", "*");
     request.send(JSON.stringify(params));
     request.onload = () => {
         if (request.status == 200) {

@@ -9,34 +9,37 @@ import STATES from "../States";
 const Lesson = ({ number, setDisplay }) => {
     const [selected, setSelected] = useState("video");
     const [currentFlashCard, setcurrentFlashCard] = useState(97);
-    const [submitted, setSubmitted] = useState("");
+    const [submitted, setSubmitted] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [questions, setQuestions] = useState([]);
 
-    const phraseList = ["hello", "no", "yes", "thank_you", "i_love_you"];
+    const phraseList = ["hello", "no", "yes", "thanks", "i_love_you"];
 
     useEffect(() => {
         if (number == 1) {
             setcurrentFlashCard(970);
+            setQuestions([
+                "B",
+                "F",
+                "G",
+                "H",
+                "I",
+                "J",
+                "K",
+                "L",
+                "O",
+                "P",
+                "Q",
+                "R",
+                "T",
+                "W",
+                "Y",
+            ]);
         } else if (number == 2) {
             setcurrentFlashCard(100);
+            setQuestions(["Hello", "Thanks", "I Love You"]);
         }
     }, []);
-
-    const generateQuiz = (number) => {
-        if (number == 1) {
-            let questions = ["B", "F", "G", "H", "I", "J", "K", "L", "O", "P", "Q", "R", "T", "W", "Y"];
-            let list = [];
-
-            for (let i = 0; i <= 5; i++) {
-                list.push(questions[Math.floor(Math.random(0, 1) * questions.length)]);
-            }
-
-            return list;
-        } else {
-            let questions = ["Hello", "Thank You", "I Love You"];
-            return questions;
-        }
-    };
 
     const flashCardText = (number) => {
         if (number == 1) {
@@ -88,43 +91,28 @@ const Lesson = ({ number, setDisplay }) => {
 
     const renderVideo = () => {
         if (number == 1) {
-            return <iframe className="w-[80%] h-full" src="https://www.youtube.com/embed/dhWk-nkdeck?list=TLGGanepkpWsvT0wNTExMjAyMw"></iframe>;
-        } else {
-            return <iframe className="w-[80%] h-full" src="https://www.youtube.com/embed/v1desDduz5M"></iframe>;
-        }
-    };
-
-    const renderQuiz = () => {
-        let questions = generateQuiz(number);
-
-        if (submitted != "") {
             return (
-                <div className="flex flex-col h-full">
-                    <div className="flex flex-col text-primary text-4xl items-center font-semibold mr-32">{`What is ${questions[currentQuestion]}`}</div>
-                    <div className="flex flex-col text-primary text-7xl items-center h-full font-medium mt-32">Correct</div>
-                    {currentQuestion == questions.length ? (
-                        <WideButton text={"Complete Quiz"} onclick={setDisplay(STATES.HOME)}></WideButton>
-                    ) : (
-                        <WideButton text={"Next Question"} onclick={setCurrentQuestion(currentQuestion + 1)}></WideButton>
-                    )}
-                </div>
+                <iframe
+                    className="w-[80%] h-full"
+                    src="https://www.youtube.com/embed/dhWk-nkdeck?list=TLGGanepkpWsvT0wNTExMjAyMw"
+                ></iframe>
+            );
+        } else {
+            return (
+                <iframe
+                    className="w-[80%] h-full"
+                    src="https://www.youtube.com/embed/v1desDduz5M"
+                ></iframe>
             );
         }
-
-        return (
-            <div className="">
-                <div className="flex flex-col text-primary text-4xl items-center font-semibold mr-32">{`What is ${questions[currentQuestion]}`}</div>
-                <WebCamCapture setSubmitted={setSubmitted}></WebCamCapture>
-            </div>
-        );
     };
-
-    // useEffect(() => {}, []);
 
     return (
         <div className="flex flex-col justify-center items-center w-full h-full m-10 space-y-8">
             {" "}
-            <div className="text-4xl text-primary text-center font-semibold tracking-wider">Lesson {number}</div>{" "}
+            <div className="text-4xl text-primary text-center font-semibold tracking-wider">
+                Lesson {number}
+            </div>{" "}
             <div className="grid grid-cols-4 w-full h-full">
                 {" "}
                 <div className="grid col-span-1 border-r-[2.5px] border-primary">
@@ -153,6 +141,7 @@ const Lesson = ({ number, setDisplay }) => {
                         className="text-3xl text-primary text-center font-semibold my-8 transition ease-in-out hover:scale-125 duration-200"
                         onClick={() => {
                             setSelected("quiz");
+                            setSubmitted(null);
                         }}
                     >
                         {" "}
@@ -162,8 +151,49 @@ const Lesson = ({ number, setDisplay }) => {
                 <div className="grid col-span-3 border-l-[2.5px] border-primary">
                     {" "}
                     <div className="flex justify-center">
-                        {" "}
-                        {selected == "video" && renderVideo()} {selected == "flashcard" && renderFlashCards()} {selected == "quiz" && renderQuiz()}{" "}
+                        {console.log(typeof submitted)}
+                        {console.log()}
+                        {selected == "video" && renderVideo()}{" "}
+                        {selected == "flashcard" && renderFlashCards()}{" "}
+                        {selected == "quiz" &&
+                            (typeof submitted == typeof "B" ? (
+                                <div className="flex flex-col h-full items-center text-5xl font-medium text-primary mt-24">
+                                    {submitted == questions[currentQuestion]
+                                        ? "Correct"
+                                        : `Wrong, you put ${submitted}`}
+                                    <div className="mt-20">
+                                        <WideButton
+                                            text={
+                                                currentQuestion + 1 <
+                                                questions.length
+                                                    ? "Next"
+                                                    : "Finish"
+                                            }
+                                            onclick={() => {
+                                                setSubmitted(null);
+
+                                                if (
+                                                    currentQuestion + 1 <
+                                                    questions.length
+                                                ) {
+                                                    setCurrentQuestion(
+                                                        currentQuestion + 1
+                                                    );
+                                                } else {
+                                                    setDisplay(STATES.HOME);
+                                                }
+                                            }}
+                                        ></WideButton>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="">
+                                    <div className="flex flex-col text-primary text-4xl items-center font-semibold mr-32">{`What is ${questions[currentQuestion]}`}</div>
+                                    <WebCamCapture
+                                        setSubmitted={setSubmitted}
+                                    ></WebCamCapture>
+                                </div>
+                            ))}{" "}
                     </div>{" "}
                 </div>{" "}
             </div>
