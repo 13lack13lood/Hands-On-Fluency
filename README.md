@@ -2,7 +2,7 @@
 
 A full-stack sign language learning platform built during the NewHacks hackathon. It teaches and quizes the user on sign language content using the webcam with OpenCV and MediaPipe. A CNN (Convolutional Neural Network) was designed using TensorFlow for hand guesture recognition, resulting in a 61% accuracy across 30 distinct classes. A Flask backend was developed to seamlessly integrate the React frontend with the SQLite database for user authentication and the hand guesture recognitional model.
 
-[Link to Backend](https://github.com/13lack13lood/Hands-On-Fluency-backend/blob/main/README.md)
+[Link to Backend](https://github.com/13lack13lood/Hands-On-Fluency-backend/)
 
 ## Technologies Used
 - React
